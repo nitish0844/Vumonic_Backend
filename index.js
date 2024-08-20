@@ -2,7 +2,6 @@ const Imap = require("imap");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const ngrok = require("ngrok");
 
 const app = express();
 app.use(cors());
@@ -54,9 +53,13 @@ app.post("/emails", (req, res) => {
   imap.connect();
 });
 
+app.get("/", (req, res) => {
+  res.send("Hello, World!");
+});
+
 app.listen(3000, async () => {
   console.log("Server is running on port 3000");
 
-  const url = await ngrok.connect(3000);
-  console.log(`Ngrok tunnel created at: ${url}`);
+  // const url = await ngrok.connect(3000);
+  // console.log(`Ngrok tunnel created at: ${url}`);
 });
